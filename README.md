@@ -1,5 +1,7 @@
 # Game Shelf
 
+![CI](https://github.com/Terigbade-Florence/FT-Game-Hub/actions/workflows/ci.yml/badge.svg)
+
 A small arcade hub (Tic-Tac-Toe, Memory Match, Snake) with a SQLite-backed leaderboard API.
 Zero npm dependencies: it runs on Node's built-in `http`, `node:sqlite` and `node:test`.
 
@@ -32,6 +34,14 @@ Set `PORT` or `DB_FILE` to change the port or database location.
   and a fresh board each time you clear one.
 - **Snake:** every 3rd apple adds a rock, and every 5th spawns a power-up (slow-mo or double points).
 - **Shelf XP:** every game earns XP toward levels, with confetti, haptics and toasts as feedback.
+
+## Deployment
+
+`render.yaml` (Render blueprint), a `Dockerfile` and a GitHub Actions workflow (`.github/workflows/ci.yml`) are included.
+Environment variables: `PORT` (3000), `DB_FILE` (`./data.sqlite`) and `TRUST_PROXY` (0).
+Step by step, including free-tier limits: [docs/DEPLOY.md](docs/DEPLOY.md).
+
+Live demo: _add the address after deploying_
 
 ## Architecture
 
