@@ -21,3 +21,10 @@ export function confetti() {
     if (++frame < 110) requestAnimationFrame(tick); else canvas.remove();
   })();
 }
+
+export function toast(text) {
+  const el = Object.assign(document.createElement("div"), { className: "toast", textContent: text });
+  el.setAttribute("role", "status");
+  document.body.append(el);
+  setTimeout(() => el.remove(), 2200);
+}

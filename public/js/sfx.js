@@ -19,7 +19,7 @@ const sfx={on:store.get("sound",true),ctx:null,
     win:()=>[523,659,784,1047].forEach((f,i)=>this.tone(f,.16,"triangle",.06,i*.12)),
     lose:()=>[330,262,196].forEach((f,i)=>this.tone(f,.2,"sawtooth",.05,i*.16)),
     draw:()=>{this.tone(440,.12,"triangle");this.tone(440,.18,"triangle",.05,.14)}};
-    if(s[n])s[n]()},
+    if(s[n])s[n]();if(this.on&&navigator.vibrate){const v={eat:12,match:20,win:[30,40,30],lose:60}[n];if(v)navigator.vibrate(v)}},
   sync(){const b=$("#sound");b.textContent=this.on?"Sound: on":"Sound: off";b.setAttribute("aria-pressed",String(this.on));b.classList.toggle("on",this.on)}
 };
 $("#sound").onclick=()=>{sfx.on=!sfx.on;store.set("sound",sfx.on);sfx.sync();sfx.play("tap")};
