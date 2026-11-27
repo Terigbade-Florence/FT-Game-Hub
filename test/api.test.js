@@ -70,3 +70,22 @@ test("static files are served and path traversal is blocked", async () => {
   assert.equal((await fetch(`${base}/missing.js`)).status, 404);
   close();
 });
+
+test("health check responds for platform probes", async () => {
+  const { base, close } = await start();
+  const res = await fetch(`${base}/healthz`);
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { ok: true });
+  close();
+});
+
+test("rate limiting uses the forwarded client IP behind a proxy", async () => {
+  const { base, close } = await start({ rateLimit: 1, trustProxy: 1 });
+  const as = (ip) => fetch(`${base}/api/scores`, {
+    method: "POST", headers: { "X-Forwarded-For": ip }, body: JSON.stringify({ game: "snake", player: "A", score: 1 }),
+  });
+  assert.equal((await as("1.1.1.1")).status, 201);
+  assert.equal((await as("2.2.2.2")).status, 201);
+  assert.equal((await as("1.1.1.1")).status, 429);
+  close();
+});

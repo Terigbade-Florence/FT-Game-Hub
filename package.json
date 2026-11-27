@@ -4,6 +4,6 @@
   "private": true,
   "type": "module",
   "description": "Arcade hub with a SQLite-backed leaderboard API",
-  "engines": { "node": ">=22.13" },
+  "engines": { "node": ">=22.13 <25" },
   "scripts": { "start": "node server/index.js", "test": "node --test" }
 }

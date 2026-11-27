@@ -33,9 +33,14 @@ export function validate(body) {
   return { game: body.game, score, player };
 }
 
-export function createApp({ db, publicDir, rateLimit = 30 }) {
+export function createApp({ db, publicDir, rateLimit = 30, trustProxy = 0 }) {
   const root = resolve(publicDir);
   const hits = new Map();
+  // Behind N trusted proxies the client IP is the Nth entry from the end of X-Forwarded-For.
+  const clientIp = (req) => {
+    const parts = String(req.headers["x-forwarded-for"] ?? "").split(",").map((s) => s.trim()).filter(Boolean);
+    return (trustProxy > 0 && parts[parts.length - trustProxy]) || req.socket.remoteAddress;
+  };
   const limited = (ip) => {
     const now = Date.now();
     const recent = (hits.get(ip) ?? []).filter((t) => now - t < 60_000);
@@ -52,7 +57,7 @@ export function createApp({ db, publicDir, rateLimit = 30 }) {
         return RULES[game] ? send(res, 200, { game, scores: db.top(game) }) : send(res, 400, { error: "Unknown game" });
       }
       if (url.pathname === "/api/scores" && req.method === "POST") {
-        if (limited(req.socket.remoteAddress)) return send(res, 429, { error: "Too many requests" });
+        if (limited(clientIp(req))) return send(res, 429, { error: "Too many requests" });
         let raw = "";
         for await (const chunk of req) {
           raw += chunk;
@@ -64,6 +69,7 @@ export function createApp({ db, publicDir, rateLimit = 30 }) {
         if (clean.error) return send(res, 422, clean);
         return send(res, 201, { id: db.add(clean.game, clean.player, clean.score), ...clean });
       }
+      if (url.pathname === "/healthz") return send(res, 200, { ok: true });
       if (url.pathname.startsWith("/api/")) return send(res, 404, { error: "Not found" });
 
       const rel = url.pathname === "/" ? "index.html" : decodeURIComponent(url.pathname).slice(1);
