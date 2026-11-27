@@ -3,6 +3,17 @@
 A small arcade hub (Tic-Tac-Toe, Memory Match, Snake) with a SQLite-backed leaderboard API.
 Zero npm dependencies: it runs on Node's built-in `http`, `node:sqlite` and `node:test`.
 
+## Screenshots
+
+<p>
+<img src="docs/screenshots/hub.jpg" width="190" alt="Game hub">
+<img src="docs/screenshots/tic-tac-toe.jpg" width="190" alt="Tic-Tac-Toe">
+<img src="docs/screenshots/memory-match.jpg" width="190" alt="Memory Match">
+<img src="docs/screenshots/snake.jpg" width="190" alt="Snake">
+</p>
+
+Design rationale, motion and accessibility notes: [docs/DESIGN.md](docs/DESIGN.md).
+
 ## Run it
 
 ```bash

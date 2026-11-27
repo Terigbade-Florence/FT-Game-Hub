@@ -22,7 +22,7 @@ export const snake = {
   start() {
     this.stop();
     Object.assign(this, { game: newGame(), dir: "R", next: "R", phase: "ready", bits: [] });
-    this.say("Press an arrow key, swipe, or tap a button to start.");
+    this.say("Swipe or tap an arrow to start.");
     this.hud();
     this.frame();
   },
