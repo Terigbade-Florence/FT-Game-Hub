@@ -20,7 +20,7 @@ $("#theme").onclick = () => {
 // --- Home: personal bests + leaderboard ---
 function refreshHome() {
   const t = store.get("ttt", ttt0), best = store.get("memBest", null);
-  $("#b-ttt").textContent = `${t.w}W · ${t.d}D · ${t.l}L`;
+  $("#b-ttt").textContent = `${t.w} wins · ${t.d} draws · ${t.l} losses`;
   $("#b-mem").textContent = best ? `Best: ${best} moves` : "No score yet";
   $("#b-snk").textContent = `Best: ${store.get("snakeBest", 0)}`;
 }
@@ -37,7 +37,7 @@ async function renderBoard() {
   const unit = boardGame === "memory" ? "moves" : "pts";
   $("#lb-list").innerHTML = rows.length
     ? rows.map((r, i) => `<li><b>${i + 1}</b><span>${esc(r.player)}</span><em>${r.score} ${unit}</em></li>`).join("")
-    : "<li><span></span><span>No scores yet. Be the first!</span></li>";
+    : "<li class='empty'><span>No scores yet. Be the first!</span></li>";
   $("#lb-note").textContent = mode.online ? "Global leaderboard" : "Offline mode: showing scores saved on this device";
   for (const g of ["snake", "memory", "blitz"]) {
     $("#lb-" + g).classList.toggle("on", g === boardGame);
@@ -56,6 +56,7 @@ function swap() {
   if (state.current === "snake" && next !== "snake") snake.stop();
   if (state.current === "memory" && next !== "memory") mem.stop();
   state.current = next;
+  document.body.dataset.view = next;
   for (const v of ["home", ...Object.keys(views)]) $("#v-" + v).hidden = v !== next;
   document.title = next === "home" ? "Game Shelf – Gaming Hub" : `${titles[next]} – Game Shelf`;
   if (next === "home") { refreshHome(); renderBoard(); } else views[next]();

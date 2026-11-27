@@ -4,7 +4,10 @@ import { confetti } from "../fx.js";
 import { submitScore } from "../api.js";
 import { SIZE, newGame, step } from "../logic.js";
 
-const cv = $("#s-canvas"), ctx = cv.getContext("2d"), CS = cv.width / SIZE;
+const cv = $("#s-canvas"), ctx = cv.getContext("2d"), BOARD = 360, CS = BOARD / SIZE;
+const dpr = Math.min(window.devicePixelRatio || 1, 3); // render at device resolution so it stays sharp
+cv.width = cv.height = BOARD * dpr;
+ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 const TOKENS = ["--cell", "--ink", "--pink", "--orange", "--mint", "--blue"];
 const palette = () => {
   const cs = getComputedStyle(document.documentElement);
@@ -46,7 +49,7 @@ export const snake = {
   },
 
   schedule() {
-    const g = this.game, base = Math.max(65, 140 - g.eaten * 3);
+    const g = this.game, base = Math.max(70, 170 - g.eaten * 4);
     this.timer = setTimeout(() => this.tick(), g.slow > 0 ? base * 1.7 : base);
   },
 
@@ -89,7 +92,13 @@ export const snake = {
 
   draw(now = 0) {
     const g = this.game, c = palette(), pulse = 1 + Math.sin(now / 160) * 0.12;
-    ctx.fillStyle = c["--cell"]; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.fillStyle = c["--cell"]; ctx.fillRect(0, 0, BOARD, BOARD);
+    ctx.fillStyle = c["--ink"]; ctx.globalAlpha = 0.05;
+    for (let i = 0; i < SIZE * SIZE; i++) {
+      const x = i % SIZE, y = Math.floor(i / SIZE);
+      if ((x + y) % 2) ctx.fillRect(x * CS, y * CS, CS, CS);
+    }
+    ctx.globalAlpha = 1;
     ctx.fillStyle = c["--ink"]; ctx.globalAlpha = 0.9;
     for (const r of g.rocks) { ctx.beginPath(); ctx.roundRect(r.x * CS + 2, r.y * CS + 2, CS - 4, CS - 4, 4); ctx.fill(); }
     ctx.globalAlpha = 1;

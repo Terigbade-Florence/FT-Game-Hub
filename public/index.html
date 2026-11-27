@@ -13,7 +13,7 @@
 <div class="wrap">
 <header>
   <a class="logo" href="#"><i></i>Game Shelf</a>
-  <div class="hbtns"><button id="sound" aria-pressed="true"></button><button id="theme" aria-label="Switch light or dark theme">Theme</button></div>
+  <div class="hbtns"><button id="sound" aria-label="Sound" aria-pressed="true"></button><button id="theme" aria-label="Switch light or dark theme">Theme</button></div>
 </header>
 <div class="xpbar" role="group" aria-label="Level progress"><span id="xp-l">Lv 1</span><i id="xp-bar"></i><small id="xp-n"></small></div>
 
@@ -35,8 +35,7 @@
 </section>
 
 <section id="v-tictactoe" class="game" hidden>
-  <div class="top"><a class="btn" href="#">Back to shelf</a><button id="t-new">New game</button></div>
-  <h2>Tic-Tac-Toe</h2>
+  <div class="top"><a class="btn" href="#">← Hub</a><h2>Tic-Tac-Toe</h2><button id="t-new">New</button></div>
   <div class="seg" role="group" aria-label="Mode"><button id="t-classic">Classic</button><button id="t-vanish">Vanishing</button></div>
   <div class="seg" role="group" aria-label="Difficulty"><button id="d-easy">Easy</button><button id="d-hard">Unbeatable</button></div>
   <p class="rule" id="t-rule"></p>
@@ -46,8 +45,7 @@
 </section>
 
 <section id="v-memory" class="game" hidden>
-  <div class="top"><a class="btn" href="#">Back to shelf</a><button id="m-new">New game</button></div>
-  <h2>Memory Match</h2>
+  <div class="top"><a class="btn" href="#">← Hub</a><h2>Memory Match</h2><button id="m-new">New</button></div>
   <div class="seg" role="group" aria-label="Mode"><button id="m-classic">Classic</button><button id="m-blitz">Blitz 60s</button></div>
   <div class="stats"><div class="stat"><small>Moves</small><span id="m-moves">0</span></div><div class="stat"><small>Score</small><span id="m-score">0</span></div><div class="stat"><small>Combo</small><span id="m-combo">–</span></div><div class="stat"><small>Time</small><span id="m-time">–</span></div></div>
   <div class="status" id="m-status" aria-live="polite"></div>
@@ -55,8 +53,7 @@
 </section>
 
 <section id="v-snake" class="game" hidden>
-  <div class="top"><a class="btn" href="#">Back to shelf</a><button id="s-new">Restart</button></div>
-  <h2>Snake</h2>
+  <div class="top"><a class="btn" href="#">← Hub</a><h2>Snake</h2><button id="s-new">Restart</button></div>
   <div class="stats"><div class="stat"><small>Score</small><span id="s-score">0</span></div><div class="stat"><small>Best</small><span id="s-best">0</span></div><div class="stat"><small>Power-up</small><span id="s-fx">None</span></div></div>
   <div class="status" id="s-status" aria-live="polite"></div>
   <canvas id="s-canvas" width="360" height="360" aria-label="Snake game board"></canvas>
