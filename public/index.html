@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Game Shelf: Tic-Tac-Toe, Memory Match and Snake with a global leaderboard.">
+<title>Game Shelf – Gaming Hub</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=DM+Sans:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<header>
+  <a class="logo" href="#"><i></i>Game Shelf</a>
+  <div class="hbtns"><button id="sound" aria-pressed="true"></button><button id="theme" aria-label="Switch light or dark theme">Theme</button></div>
+</header>
+
+<main id="main">
+<section id="v-home">
+  <div class="hero"><div class="tiles" aria-hidden="true"><i>X</i><i>O</i><i>?</i><i>▶</i></div><h1>Pick a game. Beat your best.</h1></div>
+  <p class="lede">Three quick games, one shelf. Your best scores are saved on this device.</p>
+  <div class="grid">
+    <a class="card c1" href="#tictactoe"><span class="glyph">X O</span><h2>Tic-Tac-Toe</h2><p>You are X. Try to beat the computer, or at least draw.</p><span class="best" id="b-ttt"></span></a>
+    <a class="card c2" href="#memory"><span class="glyph">?? ??</span><h2>Memory Match</h2><p>Flip two cards at a time and clear the board in the fewest moves.</p><span class="best" id="b-mem"></span></a>
+    <a class="card c3" href="#snake"><span class="glyph">~~&gt;</span><h2>Snake</h2><p>Eat, grow, and don’t hit the walls or yourself.</p><span class="best" id="b-snk"></span></a>
+  </div>
+  <section class="board" aria-labelledby="lb-h">
+  <div class="top"><h2 id="lb-h">Leaderboard</h2><div class="seg"><button id="lb-snake" aria-pressed="true">Snake</button><button id="lb-memory" aria-pressed="false">Memory</button></div></div>
+  <label class="name">Player name <input id="player" maxlength="16" autocomplete="nickname"></label>
+  <ol id="lb-list"></ol><p class="note" id="lb-note" aria-live="polite"></p>
+</section>
+<div class="foot"><span>Arrow keys, swipes, and taps all work.</span><button id="reset">Reset all scores</button></div>
+</section>
+
+<section id="v-tictactoe" class="game" hidden>
+  <div class="top"><a class="btn" href="#">Back to shelf</a><button id="t-new">New game</button></div>
+  <h2>Tic-Tac-Toe</h2>
+  <div class="seg"><button id="d-easy">Easy</button><button id="d-hard">Unbeatable</button></div>
+  <div class="stats"><div class="stat"><small>Wins</small><span id="t-w">0</span></div><div class="stat"><small>Draws</small><span id="t-d">0</span></div><div class="stat"><small>Losses</small><span id="t-l">0</span></div></div>
+  <div class="status" id="t-status" aria-live="polite"></div>
+  <div class="ttt" id="t-board"></div>
+</section>
+
+<section id="v-memory" class="game" hidden>
+  <div class="top"><a class="btn" href="#">Back to shelf</a><button id="m-new">New game</button></div>
+  <h2>Memory Match</h2>
+  <div class="stats"><div class="stat"><small>Moves</small><span id="m-moves">0</span></div><div class="stat"><small>Pairs</small><span id="m-pairs">0/8</span></div><div class="stat"><small>Best</small><span id="m-best">–</span></div></div>
+  <div class="status" id="m-status" aria-live="polite"></div>
+  <div class="mem" id="m-board"></div>
+</section>
+
+<section id="v-snake" class="game" hidden>
+  <div class="top"><a class="btn" href="#">Back to shelf</a><button id="s-new">Restart</button></div>
+  <h2>Snake</h2>
+  <div class="stats"><div class="stat"><small>Score</small><span id="s-score">0</span></div><div class="stat"><small>Best</small><span id="s-best">0</span></div></div>
+  <div class="status" id="s-status" aria-live="polite"></div>
+  <canvas id="s-canvas" width="360" height="360" aria-label="Snake game board"></canvas>
+  <div class="pad"><button class="u" data-d="U" aria-label="Up">▲</button><button data-d="L" aria-label="Left">◀</button><button data-d="D" aria-label="Down">▼</button><button data-d="R" aria-label="Right">▶</button></div>
+</section>
+</main>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
