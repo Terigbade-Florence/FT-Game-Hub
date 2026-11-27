@@ -41,7 +41,7 @@ Set `PORT` or `DB_FILE` to change the port or database location.
 Environment variables: `PORT` (3000), `DB_FILE` (`./data.sqlite`) and `TRUST_PROXY` (0).
 Step by step, including free-tier limits: [docs/DEPLOY.md](docs/DEPLOY.md).
 
-Live demo: _add the address after deploying_
+Live demo: https://ft-game-hub.onrender.com/
 
 ## Architecture
 
@@ -70,7 +70,3 @@ the files are hosted on a static site) it falls back to a leaderboard stored on 
 - **Accessibility:** skip link, live regions for game status, keyboard play, focus moved on navigation,
   `prefers-reduced-motion` and light or dark theme respected.
 - **Trade-off:** scores are self-reported by the browser, so the leaderboard is for fun, not anti-cheat.
-
-## Next steps
-
-Accounts, replayable server-side score checks, more games, and a CI workflow that runs `npm test`.
