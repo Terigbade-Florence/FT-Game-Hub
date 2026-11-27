@@ -4,6 +4,7 @@ import { DatabaseSync } from "node:sqlite";
 export const RULES = {
   snake: { min: 0, max: 2000, order: "DESC" },
   memory: { min: 8, max: 300, order: "ASC" },
+  blitz: { min: 0, max: 20000, order: "DESC" },
 };
 
 export function openDb(file = ":memory:") {

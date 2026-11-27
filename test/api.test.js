@@ -41,6 +41,8 @@ test("leaderboards rank snake high-to-low and memory low-to-high", async () => {
   for (const [player, score] of [["A", 20], ["B", 12]]) await post(base, { game: "memory", player, score });
   assert.deepEqual((await get(base, "snake")).scores.map((s) => s.player), ["B", "A"]);
   assert.deepEqual((await get(base, "memory")).scores.map((s) => s.player), ["B", "A"]);
+  for (const [player, score] of [["A", 300], ["B", 900]]) await post(base, { game: "blitz", player, score });
+  assert.deepEqual((await get(base, "blitz")).scores.map((s) => s.player), ["B", "A"]);
   close();
 });
 
